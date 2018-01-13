@@ -8,7 +8,7 @@ import (
 	//"fmt"
 )
 
-func Checkerr(e error) {
+func Check_err(e error) {
 	if e != nil {
 		panic(e)
 	}
@@ -22,7 +22,7 @@ func GetIndex(i int, leng int) int {
 func ReadArrayOfIntFromFile(fn string) []int {
 	file, err := os.Open(fn)
 	defer file.Close()
-	Checkerr(err)
+	Check_err(err)
 
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanWords)
@@ -30,7 +30,7 @@ func ReadArrayOfIntFromFile(fn string) []int {
 	temp := 0
 	for scanner.Scan() {
 		temp, err = strconv.Atoi(scanner.Text())
-		Checkerr(err)
+		Check_err(err)
 		arr = append(arr, temp)
 	}
 	if err := scanner.Err(); err != nil {
