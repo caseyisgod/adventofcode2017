@@ -15,14 +15,34 @@ type carette struct {
 
 func main() {
 	var car carette
-	iteration := car.move(readArrayOfIntFromFile("input.txt"))
+	/*	iteration := car.move(readArrayOfIntFromFile("input.txt"))
 
-	for {
-		if i := iteration(); i != 0 {
-			fmt.Println(i, "steps")
-			break
+		for {
+			if i := iteration(); i != 0 {
+				fmt.Println(i, "steps")
+				break
+			}
+		}*/
+	path := readArrayOfIntFromFile("input.txt")
+	fmt.Println(car.countSteps(path))
+
+}
+func (car *carette) countSteps(way []int) int {
+	temp := 0
+	for i := 0; true; i++ {
+		temp = way[car.pos]
+		if way[car.pos] >= 3 {
+			way[car.pos]--
+		} else {
+			way[car.pos]++
+		}
+
+		car.pos += temp
+		if car.pos < 0 || car.pos >= len(way) {
+			return i + 1
 		}
 	}
+	return 0
 }
 func (car *carette) move(way []int) func() int {
 	n, temp := 0, 0
